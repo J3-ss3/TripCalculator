@@ -46,6 +46,11 @@ pipeline {
                 sh 'docker --version'
             }
         }
+        stage('Check Network Connectivity') {
+                    steps {
+                        sh 'curl -v https://index.docker.io/v1/'
+                    }
+               }
         stage('Build Docker Image') {
             steps {
                 script {
@@ -62,11 +67,6 @@ pipeline {
                         }
                     }
                 }
-            }
-        }
-        stage('Check Network Connectivity') {
-            steps {
-                sh 'curl -v https://index.docker.io/v1/'
             }
         }
     }
