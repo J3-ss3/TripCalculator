@@ -11,6 +11,7 @@ pipeline {
             DOCKERHUB_REPO = 'jess3/trip_calculator'
             // Define Docker image tag
             DOCKER_IMAGE_TAG = 'latest_v1'
+            PATH = "/usr/local/bin:$PATH"
         }
     stages {
         stage('Checkout') {
