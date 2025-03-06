@@ -3,16 +3,13 @@ pipeline {
     tools {
         maven 'MVN'
         dockerTool 'docker'
-        }
-     environment {
-            // Define Docker Hub credentials ID
-            DOCKERHUB_CREDENTIALS_ID = 'dockercred'
-            // Define Docker Hub repository name
-            DOCKERHUB_REPO = 'jess3/trip_calculator'
-            // Define Docker image tag
-            DOCKER_IMAGE_TAG = 'latest_v1'
-            PATH = "/usr/local/bin:$PATH"
-        }
+    }
+    environment {
+        DOCKERHUB_CREDENTIALS_ID = 'dockercred'
+        DOCKERHUB_REPO = 'jess3/trip_calculator'
+        DOCKER_IMAGE_TAG = 'latest_v1'
+        PATH = "/usr/local/bin:$PATH"
+    }
     stages {
         stage('Checkout') {
             steps {
@@ -45,28 +42,32 @@ pipeline {
             }
         }
         stage('Verify Docker Installation') {
-                    steps {
-                        sh 'docker --version'
-                    }
+            steps {
+                sh 'docker --version'
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    docker.build("${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}")
                 }
-
-         stage('Build Docker Image') {
-                    steps {
-                        // Build Docker image
-                        script {
-                            docker.build("${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}")
+            }
+        }
+        stage('Push Docker Image to Docker Hub') {
+            steps {
+                script {
+                    withEnv(["PATH+DOCKER=/usr/local/bin"]) {
+                        docker.withRegistry('https://index.docker.io/v1/', DOCKERHUB_CREDENTIALS_ID) {
+                            docker.image("${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}").push()
                         }
                     }
                 }
-                stage('Push Docker Image to Docker Hub') {
-                    steps {
-                        // Push Docker image to Docker Hub
-                        script {
-                            docker.withRegistry('https://index.docker.io/v1/', DOCKERHUB_CREDENTIALS_ID) {
-                                docker.image("${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}").push()
-                            }
-                        }
-                    }
-                }
+            }
+        }
+        stage('Check Network Connectivity') {
+            steps {
+                sh 'curl -v https://index.docker.io/v1/'
+            }
+        }
     }
 }
