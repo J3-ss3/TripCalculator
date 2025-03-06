@@ -4,7 +4,7 @@ pipeline {
             // Define Docker Hub credentials ID
             DOCKERHUB_CREDENTIALS_ID = 'Docker_hub_jenkins'
             // Define Docker Hub repository name
-            DOCKERHUB_REPO = 'amirdirin/week7_inclass_test1'
+            DOCKERHUB_REPO = 'jess3/trip_calculator'
             // Define Docker image tag
             DOCKER_IMAGE_TAG = 'latest_v1'
         }
