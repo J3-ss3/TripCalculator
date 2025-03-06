@@ -14,6 +14,14 @@ pipeline {
                 git branch: 'mail', url: 'https://github.com/J3-ss3/TripCalculator.git'
             }
         }
+
+        stage('Verify Path') {
+                    steps {
+                        sh 'pwd' // Print the current working directory
+                        sh 'ls -la' // List the contents of the directory
+                    }
+                }
+
         stage('Build') {
             steps {
                 sh '"mvn clean install"'
