@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/J3-ss3/TripCalculator.git'
+                git branch: 'mail', url: 'https://github.com/J3-ss3/TripCalculator.git'
             }
         }
         stage('Build') {
