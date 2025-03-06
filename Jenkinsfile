@@ -6,7 +6,7 @@ pipeline {
         }
      environment {
             // Define Docker Hub credentials ID
-            DOCKERHUB_CREDENTIALS_ID = 'Docker_hub_jenkins'
+            DOCKERHUB_CREDENTIALS_ID = 'dockercred'
             // Define Docker Hub repository name
             DOCKERHUB_REPO = 'jess3/trip_calculator'
             // Define Docker image tag
