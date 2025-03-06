@@ -1,5 +1,7 @@
 pipeline {
     agent any
+    tools {
+        maven 'Maven'
      environment {
             // Define Docker Hub credentials ID
             DOCKERHUB_CREDENTIALS_ID = 'Docker_hub_jenkins'
