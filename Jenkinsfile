@@ -1,8 +1,12 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'tripcalaculator'
+            label 'master'
+        }
+    }
     tools {
         maven 'MVN'
-        docker 'docker'
         }
      environment {
             // Define Docker Hub credentials ID
