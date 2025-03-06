@@ -42,6 +42,10 @@ pipeline {
                 jacoco()
             }
         }
+        stage('Verify Docker Installation') {
+                    steps {
+                        sh 'docker --version'
+                    }
 
          stage('Build Docker Image') {
                     steps {
