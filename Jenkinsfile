@@ -7,8 +7,6 @@ pipeline {
         DOCKERHUB_REPO = 'jess3/trip_calculator'
         // Define Docker image tag
         DOCKER_IMAGE_TAG = 'latest_v1'
-        // Add Maven to the PATH
-        PATH = "/path/to/maven/bin:${env.PATH}"
     }
     stages {
         stage('Checkout') {
@@ -18,23 +16,31 @@ pipeline {
         }
         stage('Verify Path') {
             steps {
-                sh 'pwd' // Print the current working directory
-                sh 'ls -la' // List the contents of the directory
+                withEnv(["PATH+EXTRA=/bin:/usr/bin"]) {
+                    sh 'pwd' // Print the current working directory
+                    sh 'ls -la' // List the contents of the directory
+                }
             }
         }
         stage('Build') {
             steps {
-                sh 'mvn clean install'
+                withEnv(["PATH+EXTRA=/bin:/usr/bin"]) {
+                    sh 'mvn clean install'
+                }
             }
         }
         stage('Test') {
             steps {
-                sh 'mvn test'
+                withEnv(["PATH+EXTRA=/bin:/usr/bin"]) {
+                    sh 'mvn test'
+                }
             }
         }
         stage('Code Coverage') {
             steps {
-                sh 'mvn jacoco:report'
+                withEnv(["PATH+EXTRA=/bin:/usr/bin"]) {
+                    sh 'mvn jacoco:report'
+                }
             }
         }
         stage('Publish Test Results') {
