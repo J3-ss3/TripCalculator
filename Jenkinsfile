@@ -1,7 +1,7 @@
 pipeline {
     agent any
      environment {
-            PATH = "/opt/homebrew/bin/mvn:$PATH"
+            PATH = "/opt/homebrew/Cellar/maven/3.9.9/libexec:$PATH"
             // Define Docker Hub credentials ID
             DOCKERHUB_CREDENTIALS_ID = 'Docker_hub_jenkins'
             // Define Docker Hub repository name
