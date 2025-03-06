@@ -2,7 +2,7 @@ pipeline {
     agent any
     tools {
         maven 'MVN'
-        dockerTool 'docker'
+        docker 'docker'
         }
      environment {
             // Define Docker Hub credentials ID
