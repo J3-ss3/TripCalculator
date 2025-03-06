@@ -1,9 +1,7 @@
 pipeline {
     agent any
-    tools {
-        maven 'Maven'
-        }
      environment {
+            PATH = "/opt/homebrew/bin/mvn:$PATH"
             // Define Docker Hub credentials ID
             DOCKERHUB_CREDENTIALS_ID = 'Docker_hub_jenkins'
             // Define Docker Hub repository name
