@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'tripcalaculator'
-            label 'Jenkins'
-        }
-    }
+    agent any
     tools {
         maven 'MVN'
         }
