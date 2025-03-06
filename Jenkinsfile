@@ -46,11 +46,6 @@ pipeline {
                 sh 'docker --version'
             }
         }
-        stage('Check Network Connectivity') {
-                    steps {
-                        sh 'curl -v https://index.docker.io/v1/'
-                    }
-               }
         stage('Build Docker Image') {
             steps {
                 script {
@@ -61,7 +56,6 @@ pipeline {
         stage('Push Docker Image to Docker Hub') {
             steps {
                 script {
-                    withEnv(["PATH+DOCKER=/usr/local/bin"]) {
                         docker.withRegistry('https://index.docker.io/v1/', DOCKERHUB_CREDENTIALS_ID) {
                             docker.image("${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}").push()
                         }
