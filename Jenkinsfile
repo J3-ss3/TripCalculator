@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh '/bin/bash -c "mvn clean install"'
+                sh '"mvn clean install"'
             }
         }
         stage('Test') {
