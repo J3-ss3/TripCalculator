@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image 'tripcalaculator'
-            label 'master'
+            label 'Jenkins'
         }
     }
     tools {
